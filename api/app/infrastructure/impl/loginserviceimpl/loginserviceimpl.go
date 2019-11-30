@@ -3,7 +3,7 @@ package loginserviceimpl
 import (
 	"context"
 
-	"github.com/zawawahoge/quiz-practice-api/app/proto/v1/loginservice"
+	"github.com/zawawahoge/quiz-practice/app/proto/v1/loginservice"
 )
 
 type loginServiceServer struct {

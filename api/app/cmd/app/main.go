@@ -4,10 +4,11 @@ import (
 	"log"
 	"net"
 
-	"github.com/zawawahoge/quiz-practice-api/app/infrastructure/impl/loginserviceimpl"
-	"github.com/zawawahoge/quiz-practice-api/app/proto/v1/loginservice"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+
+	"github.com/zawawahoge/quiz-practice/app/infrastructure/impl/loginserviceimpl"
+	"github.com/zawawahoge/quiz-practice/app/proto/v1/loginservice"
 )
 
 func main() {
