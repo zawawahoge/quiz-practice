@@ -9,7 +9,6 @@ require (
 	github.com/kylelemons/go-gypsy v0.0.0-20160905020020-08cad365cd28 // indirect
 	github.com/lib/pq v1.2.0 // indirect
 	github.com/mattn/go-sqlite3 v1.13.0 // indirect
-	github.com/zawawahoge/quiz-practice-api v0.0.0-20191116030644-7d544ad4f2a6
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	golang.org/x/lint v0.0.0-20190313153728-d0100b6bd8b3 // indirect
 	golang.org/x/net v0.0.0-20191112182307-2180aed22343
