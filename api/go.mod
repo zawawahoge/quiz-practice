@@ -1,4 +1,4 @@
-module github.com/zawawahoge/quiz-practice
+module github.com/zawawahoge/quiz-practice/api
 
 go 1.12
 

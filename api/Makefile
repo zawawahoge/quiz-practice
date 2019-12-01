@@ -16,7 +16,7 @@ local-test:
 	GO111MODULE=on \
 	PROJECT_ROOT=${PWD} \
 	BUILDER_ROOT=${PWD} \
-	go test github.com/zawawahoge/quiz-practice-api/app/...
+	go test github.com/zawawahoge/quiz-practice/api/app/...
 
 local-build:
 	GO111MODULE=on go build -o bin/echo ./app/cmd/app/*.go
@@ -29,9 +29,6 @@ migrate-up:
 
 migrate-down:
 	docker-compose exec api_dev goose -path app/db down
-
-mysql-init:
-	docker-compose exec api_dev -t mysql -hdb -uroot -ppassword quiz-practice < app/db/init.sql
 
 look:
 	docker-compose exec api_dev bash
