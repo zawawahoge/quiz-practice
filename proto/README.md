@@ -11,6 +11,7 @@ backendは、https://github.com/zawawahoge/quiz-practice-api である。
 
 ## How to use
 ```
-make
+# at quiz-practice
+make proto
 ```
-`pb.go` が生成される。現状は手動で https://github.com/zawawahoge/quiz-practice-api にコピーしている。
+バックエンドに直接 `pb.go` が生成されるので、conflictを解消してコミットする。
