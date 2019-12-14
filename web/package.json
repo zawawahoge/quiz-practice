@@ -1,5 +1,5 @@
 {
-  "name": "quiz-practice",
+  "name": "web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,14 +8,13 @@
     "start": "next start"
   },
   "dependencies": {
-    "@material-ui/core": "^4.3.3",
-    "@material-ui/system": "^4.3.3",
-    "next": "9.0.5",
-    "react": "16.9.0",
-    "react-dom": "16.9.0"
+    "next": "9.1.5",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.17",
+    "@types/react": "^16.9.16",
     "typescript": "^3.7.3"
   }
 }
