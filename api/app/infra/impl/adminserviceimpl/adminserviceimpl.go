@@ -16,11 +16,11 @@ func New() service.AdminServiceServer {
 	return &adminServiceServer{}
 }
 
-func (s *adminServiceServer) Hello(con context.Context, req *service.CreateAccountRequest) (*service.CreateAccountResponse, error) {
+func (s *adminServiceServer) Login(con context.Context, req *service.CreateAccountRequest) (*service.CreateAccountResponse, error) {
 	id := req.GetId()
 	password := req.GetPassword()
-	fmt.Printf("id=%s, password=%s", id, password)
+	msg := fmt.Sprintf("id=%s, password=%s", id, password)
 	return &service.CreateAccountResponse{
-		Msg: "hello",
+		Msg: msg,
 	}, nil
 }

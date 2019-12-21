@@ -6,8 +6,8 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/zawawahoge/quiz-practice/api/app/infrastructure/impl/adminserviceimpl"
-	"github.com/zawawahoge/quiz-practice/api/app/infrastructure/impl/loginserviceimpl"
+	"github.com/zawawahoge/quiz-practice/api/app/infra/impl/adminserviceimpl"
+	"github.com/zawawahoge/quiz-practice/api/app/infra/impl/loginserviceimpl"
 	"github.com/zawawahoge/quiz-practice/api/app/proto/v1/service"
 )
 
