@@ -6,6 +6,7 @@ import (
 
 	"google.golang.org/grpc"
 
+	"github.com/zawawahoge/quiz-practice/api/app/infrastructure/impl/adminserviceimpl"
 	"github.com/zawawahoge/quiz-practice/api/app/infrastructure/impl/loginserviceimpl"
 	"github.com/zawawahoge/quiz-practice/api/app/proto/v1/service"
 )
@@ -21,6 +22,7 @@ func main() {
 	}
 	s := grpc.NewServer()
 	service.RegisterLoginServiceServer(s, loginserviceimpl.New())
+	service.RegisterAdminServiceServer(s, adminserviceimpl.New())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
