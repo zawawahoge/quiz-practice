@@ -1,25 +1,46 @@
 package main
 
 import (
-	"log"
-	"net"
+	"context" // Use "golang.org/x/net/context" for Golang version <= 1.6
+	"flag"
+	"net/http"
 
+	"github.com/golang/glog"
+	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 
-	"github.com/zawawahoge/quiz-practice/api/app/infrastructure/impl/loginserviceimpl"
-	"github.com/zawawahoge/quiz-practice/api/app/proto/v1/loginservice"
+	gw "github.com/zawawahoge/quiz-practice/api/app/proto/v1/loginservice"
 )
 
-func main() {
-	lis, err := net.Listen("tcp", ":9090")
+var (
+	// command-line options:
+	// gRPC server endpoint
+	grpcServerEndpoint = flag.String("grpc-server-endpoint", "localhost:9090", "gRPC server endpoint")
+)
+
+func run() error {
+	ctx := context.Background()
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
+
+	// Register gRPC server endpoint
+	// Note: Make sure the gRPC server is running properly and accessible
+	mux := runtime.NewServeMux()
+	opts := []grpc.DialOption{grpc.WithInsecure()}
+	err := gw.RegisterLoginServiceHandlerFromEndpoint(ctx, mux, *grpcServerEndpoint, opts)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		return err
 	}
-	s := grpc.NewServer()
-	loginservice.RegisterLoginServiceServer(s, loginserviceimpl.New())
-	reflection.Register(s)
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+
+	// Start HTTP server (and proxy calls to gRPC server endpoint)
+	return http.ListenAndServe(":8081", mux)
+}
+
+func main() {
+	flag.Parse()
+	defer glog.Flush()
+
+	if err := run(); err != nil {
+		glog.Fatal(err)
 	}
 }
