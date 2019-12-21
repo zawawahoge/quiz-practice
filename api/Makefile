@@ -1,13 +1,13 @@
 init:
 	cp .env.local .env
 	GO111MODULE=on go mod download
-	docker-compose exec api_dev go get 'bitbucket.org/liamstask/goose/cmd/goose'
 
 build:
 	docker-compose build
 
 run:
 	docker-compose up --build
+	docker-compose exec api_dev go get 'bitbucket.org/liamstask/goose/cmd/goose'
 
 clean:
 	docker-compose rm --force --stop
