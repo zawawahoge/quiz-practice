@@ -35,4 +35,6 @@ services:
       - ./app:/go/src/github.com/zawawahoge/quiz-practice/api/app
       - ./reverse-proxy:/go/src/github.com/zawawahoge/quiz-practice/api/reverse-proxy
     tty: true
+    depends_on:
+      - db
     command: ["go", "run", "./reverse-proxy/main.go"]
