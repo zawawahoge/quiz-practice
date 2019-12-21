@@ -6,6 +6,7 @@ import (
 )
 
 type loginServiceServer struct {
+	loginservice.LoginServiceServer
 }
 
 // New creats loginServiceServer implementation.

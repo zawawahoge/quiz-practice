@@ -1,5 +1,6 @@
-proto: proto/protobuf/*/*.proto
-	docker run --rm -v ${PWD}:${PWD} -w ${PWD} znly/protoc \
+proto: proto/protobuf/v1/*/*.proto
+	docker run --rm -it -v ${PWD}:${PWD} -w ${PWD} znly/protoc \
 		-I. \
 		--go_out=plugins=grpc:${PWD}/api/app \
-		proto/protobuf/loginservice/loginservice.proto
+		--grpc-gateway_out=logtostderr=true:${PWD} \
+		proto/protobuf/v1/loginservice/loginservice.proto
