@@ -5,11 +5,11 @@ proto: proto/protobuf/v1/*/*.proto
 		--grpc-gateway_out=logtostderr=true:. \
 		proto/protobuf/v1/loginservice/loginservice.proto
 	rm -rf api/app/proto
+	rm -rf api/reverse-proxy/proto
 	cp -r proto/protobuf api/app/proto
 	rm proto/protobuf/v1/*/*{.pb.go,.pb.gw.go}
 	rm api/app/proto/v1/*/*.proto
+	rm api/reverse-proxy/proto/v1/*/*.proto
 
 clean:
-	rm -rf ${PWD}/api/app/proto
-	rm proto/protobuf/v1/*/*.pb.go
-	rm proto/protobuf/v1/*/*.pb.gw.go
+	rm -rf ${PWD}/api/{app,reverse-proxy}/proto
