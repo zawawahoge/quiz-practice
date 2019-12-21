@@ -9,7 +9,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
 
-	gw "github.com/zawawahoge/quiz-practice/api/app/proto/v1/loginservice"
+	gw "github.com/zawawahoge/quiz-practice/api/app/proto/v1/service"
 )
 
 var (

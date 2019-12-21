@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package service;
+option go_package = "proto/protobuf/v1/service";
+
+import "google/api/annotations.proto";
+
+service AdminService {
+    rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
+        option (google.api.http) = {
+            post: "/v1/accounts"
+        };
+    }
+
+}
+
+message CreateAccountRequest {
+    string id = 1;
+    string password = 2;
+}
+
+message CreateAccountResponse {
+    string msg = 1;
+}

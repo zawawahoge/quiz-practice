@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package loginservice;
-option go_package = "proto/protobuf/v1/loginservice";
+package service;
+option go_package = "proto/protobuf/v1/service";
 
 import "google/api/annotations.proto";
 
