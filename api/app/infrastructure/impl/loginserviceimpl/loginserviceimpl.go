@@ -7,16 +7,16 @@ import (
 )
 
 type loginServiceServer struct {
-	loginservice.LoginServiceServer
+	service.LoginServiceServer
 }
 
 // New creats loginServiceServer implementation.
-func New() loginservice.LoginServiceServer {
+func New() service.LoginServiceServer {
 	return &loginServiceServer{}
 }
 
-func (s *loginServiceServer) Hello(con context.Context, req *loginservice.HelloRequest) (*loginservice.HelloResponse, error) {
-	return &loginservice.HelloResponse{
+func (s *loginServiceServer) Hello(con context.Context, req *service.HelloRequest) (*service.HelloResponse, error) {
+	return &service.HelloResponse{
 		Msg: "hello",
 	}, nil
 }

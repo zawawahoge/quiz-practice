@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/zawawahoge/quiz-practice/api/app/infrastructure/impl/loginserviceimpl"
-	"github.com/zawawahoge/quiz-practice/api/app/proto/v1/loginservice"
+	"github.com/zawawahoge/quiz-practice/api/app/proto/v1/service"
 )
 
 const (
@@ -20,7 +20,7 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	loginservice.RegisterLoginServiceServer(s, loginserviceimpl.New())
+	service.RegisterLoginServiceServer(s, loginserviceimpl.New())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
