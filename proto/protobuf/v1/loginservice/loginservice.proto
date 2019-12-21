@@ -6,27 +6,11 @@ option go_package = "proto/protobuf/v1/loginservice";
 import "google/api/annotations.proto";
 
 service LoginService {
-    rpc Login(LoginRequest) returns (LoginResponse) {
-        option (google.api.http) = {
-            post: "/v1/login"
-            body: "*"
-        };
-    }
-
     rpc Hello(HelloRequest) returns (HelloResponse) {
         option (google.api.http) = {
             get: "/v1/hello"
         };
     }
-}
-
-message LoginRequest {
-    string email = 1;
-    string password = 2;
-}
-
-message LoginResponse {
-    string token = 1;
 }
 
 message HelloRequest {
