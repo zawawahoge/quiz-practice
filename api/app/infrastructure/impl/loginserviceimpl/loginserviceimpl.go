@@ -2,6 +2,9 @@ package loginserviceimpl
 
 import (
 	"context"
+	"fmt"
+	"log"
+
 	"github.com/zawawahoge/quiz-practice/api/app/proto/v1/loginservice"
 )
 
@@ -23,7 +26,10 @@ func (s *loginServiceServer) Login(con context.Context, req *loginservice.LoginR
 }
 
 func (s *loginServiceServer) Hello(con context.Context, req *loginservice.HelloRequest) (*loginservice.HelloResponse, error) {
+	var Logger *log.Logger
+	Logger.Println("Hello")
+	fmt.Println("hello fmt")
 	return &loginservice.HelloResponse{
 		Msg: "hello",
-	}
+	}, nil
 }
