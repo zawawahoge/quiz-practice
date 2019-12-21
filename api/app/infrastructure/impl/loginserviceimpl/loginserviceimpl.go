@@ -21,3 +21,9 @@ func (s *loginServiceServer) Login(con context.Context, req *loginservice.LoginR
 		Token: email + password,
 	}, nil
 }
+
+func (s *loginServiceServer) Hello(con context.Context, req *loginservice.HelloRequest) (*loginservice.HelloResponse, error) {
+	return &loginservice.HelloResponse{
+		Msg: "hello",
+	}
+}

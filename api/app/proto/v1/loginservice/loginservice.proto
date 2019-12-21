@@ -12,6 +12,12 @@ service LoginService {
             body: "*"
         };
     }
+
+    rpc Hello(HelloRequest) returns (HelloResponse) {
+        option (google.api.http) = {
+            get: "/v1/hello"
+        };
+    }
 }
 
 message LoginRequest {
@@ -21,4 +27,11 @@ message LoginRequest {
 
 message LoginResponse {
     string token = 1;
+}
+
+message HelloRequest {
+}
+
+message HelloResponse {
+    string msg = 1;
 }

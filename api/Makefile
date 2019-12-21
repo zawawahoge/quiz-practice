@@ -19,7 +19,8 @@ local-test:
 	go test github.com/zawawahoge/quiz-practice/api/app/...
 
 local-build:
-	GO111MODULE=on go build -o bin/echo ./app/cmd/app/*.go
+	docker-compose exec api_dev go build -a -o build ./app/cmd/app
+
 
 mysql:
 	docker-compose exec api_dev mysql -hdb -uroot -ppassword quiz-practice

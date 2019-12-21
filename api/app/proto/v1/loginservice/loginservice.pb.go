@@ -10,6 +10,8 @@ It is generated from these files:
 It has these top-level messages:
 	LoginRequest
 	LoginResponse
+	HelloRequest
+	HelloResponse
 */
 package loginservice
 
@@ -74,9 +76,35 @@ func (m *LoginResponse) GetToken() string {
 	return ""
 }
 
+type HelloRequest struct {
+}
+
+func (m *HelloRequest) Reset()                    { *m = HelloRequest{} }
+func (m *HelloRequest) String() string            { return proto.CompactTextString(m) }
+func (*HelloRequest) ProtoMessage()               {}
+func (*HelloRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+
+type HelloResponse struct {
+	Msg string `protobuf:"bytes,1,opt,name=msg" json:"msg,omitempty"`
+}
+
+func (m *HelloResponse) Reset()                    { *m = HelloResponse{} }
+func (m *HelloResponse) String() string            { return proto.CompactTextString(m) }
+func (*HelloResponse) ProtoMessage()               {}
+func (*HelloResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+
+func (m *HelloResponse) GetMsg() string {
+	if m != nil {
+		return m.Msg
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*LoginRequest)(nil), "loginservice.LoginRequest")
 	proto.RegisterType((*LoginResponse)(nil), "loginservice.LoginResponse")
+	proto.RegisterType((*HelloRequest)(nil), "loginservice.HelloRequest")
+	proto.RegisterType((*HelloResponse)(nil), "loginservice.HelloResponse")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -91,6 +119,7 @@ const _ = grpc.SupportPackageIsVersion4
 
 type LoginServiceClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	Hello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error)
 }
 
 type loginServiceClient struct {
@@ -110,10 +139,20 @@ func (c *loginServiceClient) Login(ctx context.Context, in *LoginRequest, opts .
 	return out, nil
 }
 
+func (c *loginServiceClient) Hello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error) {
+	out := new(HelloResponse)
+	err := grpc.Invoke(ctx, "/loginservice.LoginService/Hello", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for LoginService service
 
 type LoginServiceServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	Hello(context.Context, *HelloRequest) (*HelloResponse, error)
 }
 
 func RegisterLoginServiceServer(s *grpc.Server, srv LoginServiceServer) {
@@ -138,6 +177,24 @@ func _LoginService_Login_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LoginService_Hello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HelloRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LoginServiceServer).Hello(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/loginservice.LoginService/Hello",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LoginServiceServer).Hello(ctx, req.(*HelloRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _LoginService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "loginservice.LoginService",
 	HandlerType: (*LoginServiceServer)(nil),
@@ -145,6 +202,10 @@ var _LoginService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Login",
 			Handler:    _LoginService_Login_Handler,
+		},
+		{
+			MethodName: "Hello",
+			Handler:    _LoginService_Hello_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -154,7 +215,7 @@ var _LoginService_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("proto/protobuf/v1/loginservice/loginservice.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 214 bytes of a gzipped FileDescriptorProto
+	// 271 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x32, 0x2c, 0x28, 0xca, 0x2f,
 	0xc9, 0xd7, 0x07, 0x93, 0x49, 0xa5, 0x69, 0xfa, 0x65, 0x86, 0xfa, 0x39, 0xf9, 0xe9, 0x99, 0x79,
 	0xc5, 0xa9, 0x45, 0x65, 0x99, 0xc9, 0xa9, 0x28, 0x1c, 0x3d, 0xb0, 0x2a, 0x21, 0x1e, 0x64, 0x31,
@@ -164,9 +225,12 @@ var fileDescriptor0 = []byte{
 	0x1c, 0x09, 0x46, 0x05, 0x46, 0x0d, 0xce, 0x20, 0x08, 0x47, 0x48, 0x8a, 0x8b, 0xa3, 0x20, 0xb1,
 	0xb8, 0xb8, 0x3c, 0xbf, 0x28, 0x45, 0x82, 0x09, 0x2c, 0x01, 0xe7, 0x2b, 0xa9, 0x72, 0xf1, 0x42,
 	0x4d, 0x28, 0x2e, 0xc8, 0xcf, 0x2b, 0x4e, 0x05, 0x19, 0x51, 0x92, 0x9f, 0x9d, 0x9a, 0x07, 0x33,
-	0x02, 0xcc, 0x31, 0x4a, 0x83, 0x5a, 0x14, 0x0c, 0x71, 0x96, 0x50, 0x18, 0x17, 0x2b, 0x98, 0x2f,
-	0x24, 0xa5, 0x87, 0xe2, 0x05, 0x64, 0xd7, 0x48, 0x49, 0x63, 0x95, 0x83, 0xd8, 0xa3, 0x24, 0xd2,
-	0x74, 0xf9, 0xc9, 0x64, 0x26, 0x3e, 0x25, 0x4e, 0x78, 0x98, 0x58, 0x31, 0x6a, 0x39, 0x29, 0x44,
-	0xc9, 0xe1, 0x0f, 0xb1, 0x24, 0x36, 0xb0, 0x8c, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0x1e, 0xe6,
-	0xd1, 0x8e, 0x5a, 0x01, 0x00, 0x00,
+	0x02, 0xcc, 0x51, 0xe2, 0xe3, 0xe2, 0xf1, 0x48, 0xcd, 0xc9, 0xc9, 0x87, 0x5a, 0xa4, 0xa4, 0xc8,
+	0xc5, 0x0b, 0xe5, 0x43, 0xb5, 0x09, 0x70, 0x31, 0xe7, 0x16, 0xa7, 0x43, 0x35, 0x81, 0x98, 0x46,
+	0xbb, 0x19, 0xa1, 0x8e, 0x0b, 0x86, 0x78, 0x45, 0x28, 0x8c, 0x8b, 0x15, 0xcc, 0x17, 0x92, 0xd2,
+	0x43, 0xf1, 0x36, 0xb2, 0x0f, 0xa4, 0xa4, 0xb1, 0xca, 0x41, 0x2c, 0x51, 0x12, 0x69, 0xba, 0xfc,
+	0x64, 0x32, 0x13, 0x9f, 0x12, 0x27, 0x3c, 0x1c, 0xad, 0x18, 0xb5, 0x84, 0x82, 0xb9, 0x58, 0xc1,
+	0x6e, 0x41, 0x37, 0x17, 0xd9, 0xc1, 0xe8, 0xe6, 0xa2, 0x38, 0x5e, 0x49, 0x10, 0x6c, 0x2e, 0xb7,
+	0x10, 0xd8, 0xdc, 0x0c, 0x90, 0x94, 0x93, 0x42, 0x94, 0x1c, 0xfe, 0xa8, 0x4b, 0x62, 0x03, 0xcb,
+	0x18, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0x8a, 0x27, 0xbb, 0xb1, 0xe3, 0x01, 0x00, 0x00,
 }
