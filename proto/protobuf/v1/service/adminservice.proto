@@ -9,9 +9,25 @@ service AdminService {
     rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
         option (google.api.http) = {
             post: "/v1/accounts"
+            body: "*"
         };
     }
 
+    rpc GetAccounts(GetAccountsRequest) returns (GetAccountsResponse) {
+        option (google.api.http) = {
+            get: "/v1/accounts"
+        };
+    }
+}
+
+message GetAccountsRequest {
+}
+
+message GetAccountsResponse {
+    message Account {
+        string id = 1;
+    }
+    repeated Account accounts = 1;
 }
 
 message CreateAccountRequest {

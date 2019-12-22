@@ -22,9 +22,10 @@ func NewAccountRepository(db *gorm.DB) repository.AccountRepository {
 
 // Create saves an account to DB.
 func (repo *dbAccountRepository) Create(ctx context.Context, accountID model.AccountID, accountPasswordHash model.AccountPasswordHash) (*model.Account, error) {
-	
-	return &model.Account{
+	account := &model.Account{
 		ID:           accountID,
 		PasswordHash: accountPasswordHash,
-	}, nil
+	}
+	repo.db.Create(account)
+	return account, nil
 }

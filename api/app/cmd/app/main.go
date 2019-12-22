@@ -37,8 +37,8 @@ func main() {
 	dbAccountRepository := database.NewAccountRepository(db)
 
 	s := grpc.NewServer()
-	service.RegisterLoginServiceServer(s, loginserviceimpl.New(dbAccountRepository))
 	service.RegisterAdminServiceServer(s, adminserviceimpl.New(dbAccountRepository))
+	service.RegisterLoginServiceServer(s, loginserviceimpl.New(dbAccountRepository))
 
 	fmt.Println("starting server...")
 	if err := s.Serve(lis); err != nil {

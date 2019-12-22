@@ -11,6 +11,8 @@ It is generated from these files:
 It has these top-level messages:
 	HelloRequest
 	HelloResponse
+	GetAccountsRequest
+	GetAccountsResponse
 	CreateAccountRequest
 	CreateAccountResponse
 */

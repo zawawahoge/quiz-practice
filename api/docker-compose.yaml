@@ -22,6 +22,7 @@ services:
       MYSQL_CONNECTION: ${MYSQL_CONNECTION}
     depends_on:
       - db
+    # command: ["/bin/bash", "wait.sh", "db", "root", "password", "quiz-practice", "/bin/bash"]
     command: ["/bin/bash", "wait.sh", "db", "root", "password", "quiz-practice", "go", "run", "app/cmd/app/*.go"]
 
   reverse-proxy:

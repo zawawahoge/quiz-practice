@@ -29,8 +29,20 @@ func (s *adminServiceServer) CreateAccount(ctx context.Context, req *service.Cre
 	password := req.GetPassword()
 	msg := fmt.Sprintf("id=%s, password=%s", id, password)
 	logger.Debug("hello logger")
-	fmt.Println(msg)
 	return &service.CreateAccountResponse{
 		Msg: msg,
+	}, nil
+}
+
+func (s *adminServiceServer) GetAccounts(ctx context.Context, req *service.GetAccountsRequest) (*service.GetAccountsResponse, error) {
+	logger := log.New(ctx)
+
+	logger.Debug("get accounts")
+	return &service.GetAccountsResponse{
+		Accounts: []*service.GetAccountsResponse_Account{
+			&service.GetAccountsResponse_Account{
+				Id: "ID1",
+			},
+		},
 	}, nil
 }
