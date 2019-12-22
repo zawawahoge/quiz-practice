@@ -3,6 +3,8 @@ package adminserviceimpl
 import (
 	"context"
 	"fmt"
+
+	"github.com/zawawahoge/quiz-practice/api/app/domain/repository"
 	"github.com/zawawahoge/quiz-practice/api/app/util/log"
 
 	"github.com/zawawahoge/quiz-practice/api/app/proto/v1/service"
@@ -10,11 +12,14 @@ import (
 
 type adminServiceServer struct {
 	service.AdminServiceServer
+	accountRepository repository.AccountRepository
 }
 
 // New creats loginServiceServer implementation.
-func New() service.AdminServiceServer {
-	return &adminServiceServer{}
+func New(accountRepository repository.AccountRepository) service.AdminServiceServer {
+	return &adminServiceServer{
+		accountRepository: accountRepository,
+	}
 }
 
 func (s *adminServiceServer) CreateAccount(ctx context.Context, req *service.CreateAccountRequest) (*service.CreateAccountResponse, error) {

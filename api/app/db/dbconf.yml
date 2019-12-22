@@ -1,3 +1,0 @@
-development:
-  driver: mysql
-  open: root:password@tcp(db)/quiz-practice?charset=utf8mb4&parseTime=True&loc=UTC

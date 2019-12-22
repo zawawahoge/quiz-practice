@@ -7,6 +7,7 @@ import (
 
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"google.golang.org/grpc"
 
 	gw "github.com/zawawahoge/quiz-practice/api/app/proto/v1/service"

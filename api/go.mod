@@ -13,6 +13,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway v1.12.1
 	github.com/iancoleman/strcase v0.0.0-20191112232945-16388991a334 // indirect
 	github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6 // indirect
+	github.com/jinzhu/gorm v1.9.11
 	github.com/lyft/protoc-gen-star v0.4.14 // indirect
 	github.com/nbutton23/zxcvbn-go v0.0.0-20180912185939-ae427f1e4c1d // indirect
 	github.com/pkg/sftp v1.10.1 // indirect

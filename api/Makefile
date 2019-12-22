@@ -23,7 +23,7 @@ local-build:
 
 
 mysql:
-	docker-compose exec api_dev mysql -hdb -uroot -ppassword quiz-practice
+	docker-compose up --build reverse-proxy
 
 migrate-up:
 	docker-compose exec api_dev goose -path app/db up
