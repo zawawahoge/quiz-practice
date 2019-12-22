@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/zawawahoge/quiz-practice/api/app/domain/model"
 	"github.com/zawawahoge/quiz-practice/api/app/domain/repository"
 	"github.com/zawawahoge/quiz-practice/api/app/util/log"
 
@@ -25,10 +26,15 @@ func New(accountRepository repository.AccountRepository) service.AdminServiceSer
 func (s *adminServiceServer) CreateAccount(ctx context.Context, req *service.CreateAccountRequest) (*service.CreateAccountResponse, error) {
 	logger := log.New(ctx)
 
-	id := req.GetId()
-	password := req.GetPassword()
+	id := model.AccountID(req.GetId())
+	password := model.AccountPasswordHash(req.GetPassword())
 	msg := fmt.Sprintf("id=%s, password=%s", id, password)
-	logger.Debug("hello logger")
+	logger.Debug("Debug")
+	account, err := s.accountRepository.Create(id, password)
+	if err != nil {
+		return nil, err
+	}
+	logger.Debug(fmt.Sprintf("CreateAccount successfully; account=%#v", account))
 	return &service.CreateAccountResponse{
 		Msg: msg,
 	}, nil
@@ -38,11 +44,16 @@ func (s *adminServiceServer) GetAccounts(ctx context.Context, req *service.GetAc
 	logger := log.New(ctx)
 
 	logger.Debug("get accounts")
-	return &service.GetAccountsResponse{
-		Accounts: []*service.GetAccountsResponse_Account{
-			&service.GetAccountsResponse_Account{
-				Id: "ID1",
-			},
-		},
-	}, nil
+	accounts, err := s.accountRepository.List()
+	if err != nil {
+		logger.Debug(fmt.Sprintf("failed to get accounts; err=%v", err))
+		return nil, err
+	}
+	accountIds := make([]*service.GetAccountsResponse_Account, 0, len(accounts))
+	for _, v := range accounts {
+		accountIds = append(accountIds, &service.GetAccountsResponse_Account{
+			Id: string(v.ID),
+		})
+	}
+	return &service.GetAccountsResponse{Accounts: accountIds}, nil
 }

@@ -10,6 +10,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	"github.com/zawawahoge/quiz-practice/api/app/domain/model"
 	"github.com/zawawahoge/quiz-practice/api/app/infra/impl/adminserviceimpl"
 	"github.com/zawawahoge/quiz-practice/api/app/infra/impl/loginserviceimpl"
 	database "github.com/zawawahoge/quiz-practice/api/app/infra/repository"
@@ -33,6 +34,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	db.AutoMigrate(&model.Account{})
 
 	dbAccountRepository := database.NewAccountRepository(db)
 
